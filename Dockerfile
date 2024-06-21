@@ -1,7 +1,6 @@
 FROM debian:stable
 
 WORKDIR /app
-
 # Update package list and install prerequisites
 RUN apt-get update && apt-get install -y curl sudo && rm -rf /var/lib/apt/lists/*
 
