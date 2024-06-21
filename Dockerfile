@@ -15,4 +15,4 @@ RUN npm ci --omit=dev && npm cache clean --force
 
 EXPOSE 3000
 
-CMD node server.js >>/var/logs/api-gateway/server.log 2>&1
+CMD ["node", "server.js"]
