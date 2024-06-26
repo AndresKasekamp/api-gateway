@@ -34,4 +34,4 @@ WORKDIR /app
 COPY --chown=node:node package*.json ./
 RUN npm ci && npm cache clean --force
 COPY --chown=node:node . .
-CMD ["node", "./bin/www"]
+CMD ["node", "server.js"]
