@@ -9,10 +9,10 @@ FROM ubuntu:lunar-20230816 as base
 # replace npm in CMD with tini for better kernel signal handling
 # You may also need development tools to build native npm addons:
 # apt-get install gcc g++ make
-RUN apt-get update \
-    && apt-get -qq install -y --no-install-recommends \
-    tini \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get -qq install -y --no-install-recommends \
+        tini && \
+    rm -rf /var/lib/apt/lists/*
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
 # new way to get node, let's copy in the specific version we want from a docker image
@@ -23,8 +23,8 @@ COPY --from=node /usr/local/bin/ /usr/local/bin/
 RUN corepack disable && corepack enable
 
 # create node user and group
-RUN groupadd --gid 1001 node \
-    && useradd --uid 1001 --gid node --shell /bin/bash --create-home node
+RUN groupadd --gid 1001 node && \
+    useradd --uid 1001 --gid node --shell /bin/bash --create-home node
 
 # you'll likely need more stages for dev/test, but here's our basic prod layer with source code
 FROM base as prod
