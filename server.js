@@ -20,6 +20,11 @@ app.use(orderRoute, orderProxy);
 // Billing amqp API to send billing through amqp
 app.use(billingRoute, router);
 
+app.get("/api/health", (req, res) => {
+  console.log("GET /api/health")
+  res.send('Health check done')
+})
+
 app.listen(PORT, () => {
   console.log("API Gateway listening on port: " + PORT);
 });
